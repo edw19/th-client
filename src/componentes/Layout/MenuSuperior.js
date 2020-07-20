@@ -20,6 +20,8 @@ import 'moment/locale/es';
 import DescontarPermisos from '../Permisos/DescontarPermisos';
 import AdministrarContratos from '../Contratos/AdministrarContratos';
 import NuevoContrato from '../Contratos/NuevoContrato';
+import Usuario from '../Usuario/Usuario';
+import Editar from '../Usuario/Editar';
 moment.locale('es');
 
 function MenuSuperior({ cambiarClase }) {
@@ -68,6 +70,9 @@ function MenuSuperior({ cambiarClase }) {
                     {/* Contratos */}
                     <RutasPrivadas exact path="/dashboard/administrar-contratos" component={() => <AdministrarContratos />} />
                     <RutasPrivadas exact path="/dashboard/nuevo-contrato" component={() => <NuevoContrato />} />
+                    {/* Usuario */}
+                    <RutasPrivadas exact path="/dashboard/configuracion-usuario" component={() => <Usuario />} />
+                    <RutasPrivadas exact path="/dashboard/editar-usuario" component={() => <Editar />} />
                     <Dashboard />
                     <Route path='*' render={() => "404 not found"} />
                 </Switch>

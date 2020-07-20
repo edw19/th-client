@@ -1,41 +1,98 @@
-import React from 'react';
+import React from "react";
+import NumeroFuncionariosTipo from "./NumeroFuncionariosTipo";
+import PorcentajeMF from "./PorcentajeMF";
+import EdadPromedioMF from "./EdadPromedioMF";
+import MasPermisos from "./MasPermisos";
+import TendeciaPermisos from "./TendeciaPermisos";
+import PorcentajeDiscapacidad from "./PorcentajeDiscapacidad";
 
 function Dashboard() {
-    return (
-        <div className="pl-2 border p-3">
-            <h1 className="text-center">Panel de control</h1>
-            <div className="row p-1">
-                <div  className="col" style={{ height: '15em', overflow: 'hidden', backgroundColor: 'red', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <p>Número de funcionarios por tipo</p>
-                </div>
-                <div className="col" style={{ height: '15em', backgroundColor: 'pink', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <p> Numero de funcionario hombres y mujeres </p>
-                </div>
-                <div className="col" style={{ height: '15em', backgroundColor: 'blue', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <p>Edad promerdio de hombre y promedio de mujeres</p>
-                </div>
-                <div className="w-100"></div>
-                <div className="col" style={{ height: '15em', backgroundColor: 'orange', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <p>Los 10 funcionarios con màs permisos</p>
-                </div>
-                <div className="col" style={{ height: '15em', backgroundColor: 'yellow', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    <p></p>
-                </div>
-                <div className="col" style={{ height: '15em', backgroundColor: 'pink', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    asdasdasd
-                </div>
-                <div className="w-100"></div>
-                <div className="col" style={{ height: '15em', backgroundColor: 'yellow', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    asdasdasd
-                </div>
-                <div className="col" style={{ height: '15em', backgroundColor: 'red', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    asdasdasd
-                </div>
-                <div className="col" style={{ height: '15em', backgroundColor: 'orange', display: 'flex', flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                    asdasd
-                </div>
-            </div>
+  return (
+    <div className="pl-2 border p-3">
+      <div className="row">
+        <div
+          className="col"
+          style={{
+            height: "25em",
+            overflow: "hidden",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>Número de funcionarios por tipo</p>
+          <NumeroFuncionariosTipo />
         </div>
-    )
+        <div
+          className="col"
+          style={{
+            height: "25em",
+            display: "flex",
+            overflow: "hidden",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p> Porcentaje de funcionarios por género </p>
+          <PorcentajeMF className="-mt-5" />
+        </div>
+        <div
+          className="col"
+          style={{
+            height: "25em",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>Edad promerdio de hombre y promedio de mujeres</p>
+          <EdadPromedioMF />
+        </div>
+        <div className="w-100"></div>
+        <div
+          className="col"
+          style={{
+            height: "25em",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>5 funcionarios con más permisos</p>
+          <MasPermisos />
+        </div>
+        <div
+          className="col"
+          style={{
+            height: "25em",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>Día de la semana en el cual se tiende a solicitar más permisos</p>
+          <TendeciaPermisos />
+        </div>
+        <div
+          className="col"
+          style={{
+            height: "25em",
+            display: "flex",
+            flexDirection: "column",
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <p>Número de funcionarios que padecen una discapacidad</p>
+          <PorcentajeDiscapacidad />
+        </div>
+      </div>
+    </div>
+  );
 }
 export default Dashboard;

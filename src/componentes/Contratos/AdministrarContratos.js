@@ -155,7 +155,7 @@ function AdministrarContratos() {
                                 <Error />
                                 <Exito />
                                 {
-                                    Object.keys(funcionario).length > 0 &&
+                                    Object.keys(funcionario).length > 0 & funcionario.nombreImagen !== null ?
                                     <>
                                         <img
                                             width="250px"
@@ -164,7 +164,7 @@ function AdministrarContratos() {
                                             src={`http://localhost:5000/imagenes/${funcionario.nombreImagen}`}
                                             alt={`${funcionario.nombre} ${funcionario.apellido}`}
                                         />
-                                    </>
+                                    </> : null
                                 }
                             </div>
                         </> : <SinPeriodo />

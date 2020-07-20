@@ -28,6 +28,7 @@ function MenuIzquierdo() {
                     <Link to="/dashboard/administrar-contratos" className="list-group-item list-group-item-action bg-light"><i className="pi pi-file-pdf" style={{ fontSize: '2em' }}></i>Documentos</Link>
                     <Link to="/dashboard/administrar-funcionarios" className="list-group-item list-group-item-action bg-light"><i className="pi pi-user-minus" style={{ fontSize: '2em' }} ></i> Funcionarios</Link>
                     <Link to="/dashboard/configuracion-periodo" className="list-group-item list-group-item-action bg-light"><i className="pi pi-tags" style={{ fontSize: '2em' }}></i> Configuración Período</Link>
+                    <Link to="/dashboard/configuracion-usuario" className="list-group-item list-group-item-action bg-light"><i className="pi pi-user" style={{ fontSize: '2em' }}></i> Administrador </Link>
                 </div>
             </div>
             <MenuSuperior
