@@ -12,7 +12,7 @@ export default function MostrarImagenes() {
         <img
           style={{ width: 200 }}
           key={x}
-          src={`http://localhost:5000/imagenes/${x}`}
+          src={`http://127.0.0.1:5000/imagenes/${x}`}
           alt={x}
         />
       ))}

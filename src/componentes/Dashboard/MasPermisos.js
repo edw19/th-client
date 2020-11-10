@@ -1,13 +1,7 @@
 import React from "react";
 import { useQuery } from "@apollo/react-hooks";
 import { MAS_PERMISOS } from "../../queries";
-import {
-  BarChart,
-  Bar,
-  Cell,
-  YAxis,
-  CartesianGrid,
-} from "recharts";
+import { BarChart, Bar, Cell, YAxis, CartesianGrid } from "recharts";
 import { scaleOrdinal } from "d3-scale";
 import { schemeCategory10 } from "d3-scale-chromatic";
 
@@ -43,9 +37,15 @@ const TriangleBar = (props) => {
 };
 
 function MasPermisos() {
-  const { data, loading } = useQuery(MAS_PERMISOS);
+  const { data, loading, startPolling, stopPolling } = useQuery(MAS_PERMISOS);
+  React.useEffect(() => {
+    startPolling(500);
+    return () => stopPolling();
+  }, [startPolling, stopPolling]);
+
   if (loading) return "Cargando...";
   const datos = define(data.masPermisos);
+  if (Object.keys(data.masPermisos).length === 0) return <h4>Sin Permisos</h4>;
   return (
     <div>
       <BarChart width={450} height={240} data={datos}>
@@ -64,8 +64,14 @@ function MasPermisos() {
       </BarChart>
       <ul>
         {datos.map((fun, index) => (
-          <li key={`${index + "" + fun.permisos}`} style={{listStyleType: 'none'}}>
-            <span style={{color: colors[index % 20]}}>{fun.tipoFuncionario}</span> {fun.funcionario}
+          <li
+            key={`${index + "" + fun.permisos}`}
+            style={{ listStyleType: "none" }}
+          >
+            <span style={{ color: colors[index % 20] }}>
+              {fun.tipoFuncionario}
+            </span>{" "}
+            {fun.funcionario}
           </li>
         ))}
       </ul>

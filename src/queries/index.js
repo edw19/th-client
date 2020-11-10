@@ -1,11 +1,82 @@
 import gql from "graphql-tag";
 
+export const ESTAS_AUTENTICADO = gql`
+  query estasAutenticado($token: String!) {
+    estasAutenticado(token: $token)
+  }
+`;
+
+// reportes por tipoFuncionario
+export const OBTENER_SALDO_VACACIONES_PERMISOS_FUNCIONARIOS = gql`
+  query obtenerSaldoVacionesPermisosFuncionarios(
+    $periodo: ID
+    $tipoFuncionario: String
+  ) {
+    obtenerSaldoVacionesPermisosFuncionarios(
+      periodo: $periodo
+      tipoFuncionario: $tipoFuncionario
+    ) {
+      cedula
+      nombre
+      segundoNombre
+      apellido
+      segundoApellido
+      tipoFuncionario
+      diasAFavor
+      horasAcumuladas
+      minutosAcumulados
+      vacaciones
+      permisos
+    }
+  }
+`;
+
+// reportes permisos
+export const REPORTE_PERMISOS = gql`
+  query obtenerPermisosReporte($id: ID!, $periodo: ID!) {
+    obtenerPermisosReporte(id: $id, periodo: $periodo) {
+      permisos {
+        motivo
+        horaSalida
+        horasPermiso
+        minutosPermiso
+      }
+      resultado {
+        totalPermisos
+        totalPermisosEnHoras
+        totalPermisosEnMinutos
+        diasDescontados
+        totalPorMotivo {
+          motivo
+          valor
+        }
+      }
+    }
+  }
+`;
+
+// obtener funcionarios
+export const OBTENER_FUNCIONARIOS = gql`
+  query obtenerFuncionarios {
+    obtenerFuncionarios {
+      cedula
+      nombre
+      segundoNombre
+      apellido
+      diasAFavor
+      segundoApellido
+      tipoFuncionario
+      tipoVinculacion
+    }
+  }
+`;
+
 // dashboard
 export const NUMERO_EMPLEADOS_POR_TIPO = gql`
   query {
     numeroEmpleadosPorTipo {
       name
-      numero
+      valor
     }
   }
 `;
@@ -63,9 +134,15 @@ export const PORCENTAJE_FUNCIONARIO_DISCAPACIDAD = gql`
 // contratos
 
 export const OBTENER_CONTRATOS = gql`
-  query obtenerContratos($funcionario: ID!, $limite: Int, $offset: Int) {
+  query obtenerContratos(
+    $funcionario: ID!
+    $periodo: ID!
+    $limite: Int
+    $offset: Int
+  ) {
     obtenerContratos(
       funcionario: $funcionario
+      periodo: $periodo
       limite: $limite
       offset: $offset
     ) {
@@ -76,6 +153,8 @@ export const OBTENER_CONTRATOS = gql`
         tipoContrato
         contrato
         nombramiento
+        vigenciaInicio
+        vigenciaFinal
         fechaInicioActividades
       }
       totalContratos
@@ -118,6 +197,7 @@ export const OBTENER_VACACIONES = gql`
         funcionario
         fechaSalida
         fechaEntrada
+        motivo
         diasSolicitados
         estado
       }
@@ -151,6 +231,7 @@ export const OBTENER_PERMISOS = gql`
       offset: $offset
     ) {
       id
+      fechaSalida
       horaSalida
       horasPermiso
       minutosPermiso
@@ -174,7 +255,12 @@ export const OBTENER_FUNCIONARIO = gql`
       tipoVinculacion
       tipoFuncionario
       fechaNacimiento
-      tituloProfesional
+      fechaIngreso
+      fechaSalida
+      tituloProfesional {
+        nombre
+        principal
+      }
       genero
       tipoSangre
       estadoCivil
@@ -189,11 +275,21 @@ export const OBTENER_FUNCIONARIO = gql`
 `;
 
 // usuario actual consulta
+export const USUARIOS = gql`
+  query obtenerUsuarios {
+    obtenerUsuarios {
+      id
+      nombre
+      correo
+      rol
+    }
+  }
+`;
 export const USUARIO_ACTUAL = gql`
   query obtenerUsuario {
     obtenerUsuario {
       id
-      usuario
+      rol
       correo
       nombre
     }

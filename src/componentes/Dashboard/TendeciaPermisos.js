@@ -11,8 +11,17 @@ import {
 } from "recharts";
 
 function TendeciaPermisos() {
-  const { loading, data } = useQuery(TENDENCIA_PERMISOS);
+  const { loading, data, startPolling, stopPolling } = useQuery(
+    TENDENCIA_PERMISOS
+  );
+  React.useEffect(() => {
+    startPolling(500);
+    return () => stopPolling();
+  }, [startPolling, stopPolling]);
+
   if (loading) return "Cargando...";
+  if (Object.keys(data.tendenciaPermisos).length === 0)
+    return <h4>Sin información</h4>;
   const dias = [];
 
   function obtenerDias() {

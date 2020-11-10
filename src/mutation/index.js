@@ -1,5 +1,12 @@
 import gql from "graphql-tag";
 
+// descontar pérmisos masivo
+export const DESCONTAR_PERMISOS_MASIVO = gql`
+  mutation($idPeriodo: String!) {
+    descontarPermisosMasivo(idPeriodo: $idPeriodo)
+  }
+`;
+
 // usuarios
 export const VERIFICAR_PASSWORD = gql`
   mutation verificarPassword($id: ID!, $password: String!) {
@@ -139,8 +146,8 @@ export const ELIMINAR_FUNCIONARIO = gql`
 `;
 
 export const AUTENTICAR_USUARIO = gql`
-  mutation autenticarUsuario($usuario: String!, $password: String!) {
-    autenticarUsuario(usuario: $usuario, password: $password) {
+  mutation autenticarUsuario($email: String!, $password: String!) {
+    autenticarUsuario(email: $email, password: $password) {
       token
     }
   }
@@ -148,5 +155,45 @@ export const AUTENTICAR_USUARIO = gql`
 export const UPLOAD_FILE = gql`
   mutation UploadFile($file: Upload!) {
     uploadFile(file: $file)
+  }
+`;
+
+// usuario
+export const CAMBIAR_ROL_USUARIO = gql`
+  mutation cambiarRolUsuario($id: ID!, $rol: String!) {
+    cambiarRolUsuario(id: $id, rol: $rol)
+  }
+`;
+
+export const ELIMINAR_USUARIO = gql`
+  mutation eliminarUsuario($id: ID!) {
+    eliminarUsuario(id: $id)
+  }
+`;
+
+export const RECUPERAR_PASSWORD = gql`
+  mutation recuperarPassword($correo: String!) {
+    recuperarPassword(correo: $correo)
+  }
+`;
+export const CREAR_USUARIO = gql`
+  mutation crearUsuario(
+    $rol: String!
+    $nombre: String!
+    $password: String!
+    $correo: String!
+  ) {
+    crearUsuario(
+      rol: $rol
+      nombre: $nombre
+      password: $password
+      correo: $correo
+    )
+  }
+`;
+
+export const FILE_MASIVO = gql`
+  mutation fileMasivo($file: Upload!) {
+    fileMasivo(file: $file)
   }
 `;

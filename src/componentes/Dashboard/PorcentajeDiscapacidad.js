@@ -11,8 +11,21 @@ import {
 } from "recharts";
 
 function PorcentajeDiscapacidad() {
-  const { loading, data } = useQuery(PORCENTAJE_FUNCIONARIO_DISCAPACIDAD);
+  const { loading, data, startPolling, stopPolling } = useQuery(
+    PORCENTAJE_FUNCIONARIO_DISCAPACIDAD
+  );
+
+  React.useEffect(() => {
+    startPolling(500);
+    return () => stopPolling();
+  }, [startPolling, stopPolling]);
+
   if (loading) return "Cargando...";
+  if (
+    data.porcentajeFuncionarioDiscapacidad[0].porcentaje === null ||
+    data.porcentajeFuncionarioDiscapacidad[0].porcentaje === 0
+  )
+    return <h4>Sin información</h4>;
 
   return (
     <AreaChart
@@ -24,7 +37,12 @@ function PorcentajeDiscapacidad() {
       <XAxis dataKey="total" />
       <YAxis />
       <Tooltip />
-      <Area type="monotone" dataKey="porcentaje" stroke="#8884d8" fill="#8884d8" />
+      <Area
+        type="monotone"
+        dataKey="porcentaje"
+        stroke="#8884d8"
+        fill="#8884d8"
+      />
     </AreaChart>
   );
 }

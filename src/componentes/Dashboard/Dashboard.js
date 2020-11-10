@@ -4,17 +4,16 @@ import PorcentajeMF from "./PorcentajeMF";
 import EdadPromedioMF from "./EdadPromedioMF";
 import MasPermisos from "./MasPermisos";
 import TendeciaPermisos from "./TendeciaPermisos";
-import PorcentajeDiscapacidad from "./PorcentajeDiscapacidad";
+// import PorcentajeDiscapacidad from "./PorcentajeDiscapacidad";
 
 function Dashboard() {
   return (
-    <div className="pl-2 border p-3">
+    <div className="pt-2">
       <div className="row">
         <div
-          className="col"
+          className="col-sm"
           style={{
             height: "25em",
-            overflow: "hidden",
             display: "flex",
             flexDirection: "column",
             justifyContent: "center",
@@ -29,7 +28,6 @@ function Dashboard() {
           style={{
             height: "25em",
             display: "flex",
-            overflow: "hidden",
             flexDirection: "column",
             justifyContent: "center",
             alignItems: "center",
@@ -51,7 +49,8 @@ function Dashboard() {
           <p>Edad promerdio de hombre y promedio de mujeres</p>
           <EdadPromedioMF />
         </div>
-        <div className="w-100"></div>
+      </div>
+      <div className="row">
         <div
           className="col"
           style={{
@@ -75,22 +74,24 @@ function Dashboard() {
             alignItems: "center",
           }}
         >
-          <p>Día de la semana en el cual se tiende a solicitar más permisos</p>
+          <p className="mt-5">
+            Día de la semana en el cual se tiende a solicitar más permisos
+          </p>
           <TendeciaPermisos />
         </div>
-        <div
-          className="col"
-          style={{
-            height: "25em",
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
-          <p>Número de funcionarios que padecen una discapacidad</p>
-          <PorcentajeDiscapacidad />
-        </div>
+        {/* <div
+            className="col-sm"
+            style={{
+              height: "25em",
+              display: "flex",
+              flexDirection: "column",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <p>Número de funcionarios que padecen una discapacidad</p>
+            <PorcentajeDiscapacidad />
+          </div> */}
       </div>
     </div>
   );

@@ -17,6 +17,8 @@ import Noty from "noty";
 import moment from "moment";
 import "moment/locale/es";
 import Spinner from "../Spinner";
+import GenerarReportePermisos from "./GenerarReportePermisos";
+import { useState } from "react";
 moment.locale("es");
 
 function AdministrarPermisos() {
@@ -30,6 +32,7 @@ function AdministrarPermisos() {
   const [eliminarPermiso] = useMutation(ELIMINAR_PERMISO);
   const [actualizarEstadoPermiso] = useMutation(ACTUALIZAR_ESTADO_PERMISO);
   const [actualizarDiasHabiles] = useMutation(ACTUALIZAR_DIAS_HABILES);
+  const [generar, setGenerar] = useState(false);
 
   const eliminarPermisoFuncion = (id) => {
     new Promise((resolve, reject) => {
@@ -97,8 +100,8 @@ function AdministrarPermisos() {
   };
 
   return (
-    <div className="ml-5">
-      <h2>Administrar Permisos</h2>
+    <div className="ml-3">
+      <h2>Otorgar Permisos</h2>
       <div className="row">
         {loading ? (
           <Spinner />
@@ -109,8 +112,9 @@ function AdministrarPermisos() {
                 <div className="col ml-3">
                   <Link
                     to="/dashboard/nuevo-permiso"
-                    className="btn btn-link border text-decoration-none"
+                    className="btn btn-outline-primary"
                   >
+                    <i className="pi pi-plus mr-2"></i>
                     Nuevo Permiso
                   </Link>
                   {Object.keys(totalPermisos).length > 0 && (
@@ -126,19 +130,49 @@ function AdministrarPermisos() {
                       mostrarExito={mostrarExito}
                     />
                   )}
+                  {Object.keys(totalPermisos).length > 0 ? (
+                    !generar ? (
+                      <button
+                        onClick={() => {
+                          setGenerar(true);
+                          setTimeout(() => {
+                            setGenerar(false);
+                          }, 5000);
+                        }}
+                        className="btn btn-outline-success ml-2"
+                      >
+                        <li className="pi pi-file-pdf" /> Generar Reporte
+                      </button>
+                    ) : (
+                      <GenerarReportePermisos />
+                    )
+                  ) : null}
                 </div>
                 <Cedula2
                   mostrarError={mostrarError}
                   mostrarExito={mostrarExito}
+                  setGenerar={setGenerar}
                 />
               </div>
               {Object.keys(funcionario).length > 0 && (
                 <div className="mr-3 d-flex justify-content-between">
-                  <h6>{funcionario.diasAFavor} días a favor</h6>
+                  <h6>{funcionario.diasAFavor} Días disponibles</h6>
                   <h6>
                     Permisos
                     {funcionario.genero === "MASCULINO" ? " del " : " de la "}
-                    {funcionario.tipoFuncionario}
+                    {funcionario.tipoFuncionario === "CÓDIGO DE TRABAJO" &&
+                    funcionario.genero === "MASCULINO"
+                      ? "TRABAJADOR: "
+                      : funcionario.tipoFuncionario === "CÓDIGO DE TRABAJO" &&
+                        funcionario.genero === "FEMENINO"
+                      ? "TRABAJADORA: "
+                      : funcionario.tipoFuncionario === "ADMINISTRATIVO" &&
+                        funcionario.genero === "FEMENINO"
+                      ? "ADMINISTRATIVA: "
+                      : funcionario.tipoFuncionario === "ADMINISTRATIVO" &&
+                        funcionario.genero === "MASCULINO"
+                      ? "ADMINISTRATIVO: "
+                      : funcionario.tipoFuncionario + ": "}
                     {` ${funcionario.nombre} ${funcionario.segundoNombre} ${funcionario.apellido} ${funcionario.segundoApellido}`}
                   </h6>
                 </div>
@@ -167,7 +201,7 @@ function AdministrarPermisos() {
                               }}
                             >
                               <td>
-                                {moment(new Date(permiso.horaSalida)).format(
+                                {moment(new Date(permiso.fechaSalida)).format(
                                   "LL"
                                 )}
                               </td>
@@ -186,6 +220,11 @@ function AdministrarPermisos() {
                               <td>
                                 <button
                                   className="btn btn-outline-secondary"
+                                  disabled={
+                                    permiso.motivo === "Asuntos Personales"
+                                      ? false
+                                      : true
+                                  }
                                   onClick={() =>
                                     cambiarEstadoPermiso(
                                       permiso.id,
@@ -200,7 +239,6 @@ function AdministrarPermisos() {
                               </td>
                               <td>
                                 <button
-                                  disabled={!permiso.estado ? false : true}
                                   onClick={() =>
                                     eliminarPermisoFuncion(permiso.id)
                                   }
@@ -234,27 +272,37 @@ function AdministrarPermisos() {
             <div className="col-3">
               <Error />
               <Exito />
-              {Object.keys(funcionario).length > 0 & funcionario.nombreImagen !== null ? (
+              {Object.keys(funcionario).length > 0 ? (
                 <>
-                  <img
-                    width="250px"
-                    height="250px"
-                    className="img-fluid rounded rounded-circle"
-                    src={`http://localhost:5000/imagenes/${funcionario.nombreImagen}`}
-                    alt={`${funcionario.nombre} ${funcionario.apellido}`}
-                  />
-                  {funcionario.horasAcumuladas > 0 &&
+                  {funcionario.nombreImagen && (
+                    <img
+                      width="250px"
+                      height="250px"
+                      className="img-fluid rounded rounded-circle"
+                      src={`http://localhost:5000/imagenes/${funcionario.nombreImagen}`}
+                      alt={`${funcionario.nombre} ${funcionario.apellido}`}
+                    />
+                  )}
+                  {funcionario.horasAcumuladas > 0 ||
                   funcionario.minutosAcumulados > 0 ? (
                     <>
-                      <p className="text-uppercase text-left mt-2">
-                        Funcionario tiene horas acumuladas del período anterior
+                      <p className="text-uppercase font-weight-bold text-left mt-2">
+                        funcionario dispone de Horas acumuladas
                       </p>
-                      <p>Horas Acumuladas: {funcionario.horasAcumuladas}</p>
-                      <p>Minutos Acumulados: {funcionario.minutosAcumulados}</p>
+                      {funcionario.horasAcumuladas > 0 && (
+                        <p className="text-uppercase text-left">
+                          {funcionario.horasAcumuladas} Horas
+                        </p>
+                      )}
+                      {funcionario.minutosAcumulados > 0 && (
+                        <p className="text-uppercase text-left">
+                          Minutos: {funcionario.minutosAcumulados}
+                        </p>
+                      )}
                     </>
                   ) : null}
                 </>
-              ): null}
+              ) : null}
             </div>
           </>
         ) : (

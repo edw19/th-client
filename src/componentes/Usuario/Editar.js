@@ -5,14 +5,16 @@ import { withRouter } from "react-router-dom";
 import { VERIFICAR_PASSWORD } from "../../mutation";
 import { ACTUALIZAR_USUARIO } from "../../mutation";
 import { useMutation } from "@apollo/react-hooks";
+import { Link } from "react-router-dom";
 
 function Editar(props) {
-  const { id, nombre, usuario, correo } = props.location.state;
+  const { id, nombre, rol, correo } = props.location.state.usuario;
+  const { id: idAdmin } = props.location.state;
   const [verificarPassword] = useMutation(VERIFICAR_PASSWORD);
   const [actualizarUsuario] = useMutation(ACTUALIZAR_USUARIO);
   const estadoInicial = {
     nombre: nombre,
-    usuario: usuario,
+    rol: rol,
     nuevoPassword: "",
     correo: correo,
   };
@@ -24,7 +26,9 @@ function Editar(props) {
     e.preventDefault();
     if (!password) return mostrarError("No has ingresado ninguna contraseña");
 
-    const { data } = await verificarPassword({ variables: { id, password } });
+    const { data } = await verificarPassword({
+      variables: { id: idAdmin ? idAdmin : id, password },
+    });
     if (!data.verificarPassword) {
       guardarContraseñaValida(data.verificarPassword);
       return mostrarError("Contraseña Incorrecta");
@@ -38,25 +42,42 @@ function Editar(props) {
     if (nuevoUsuario.nombre === "" || nuevoUsuario.usuario === "")
       return mostrarError("no puedes dejar en blanco el usuario y nombre");
 
-    // if (nuevoUsuario.nuevoPassword === "")
-    //   return mostrarError("Ahora debes actualizar tu contraseña");
-
     const { data } = await actualizarUsuario({
       variables: {
         input: {
           id,
           nombre: nuevoUsuario.nombre,
-          usuario: nuevoUsuario.usuario,
-          correo: nuevoUsuario.correo,
+          rol: nuevoUsuario.rol,
+          correo: !nuevoUsuario.correo
+            ? correo
+            : nuevoUsuario.correo.includes("@upec.edu.ec")
+            ? nuevoUsuario.correo
+            : nuevoUsuario.correo + "@upec.edu.ec",
           nuevoPassword: nuevoUsuario.nuevoPassword,
         },
       },
     });
     mostrarExito(data.actualizarUsuario);
+    setTimeout(() => {
+      props.history.push("configuracion-usuarios");
+    }, 1200);
   };
+
   return (
-    <div className="ml-5">
-      <h2>Actualizar Usuario</h2>
+    <div className="ml-3">
+      <div className="row">
+        <div className="col-5">
+          <h2>Actualizar Usuario</h2>
+        </div>
+        <div className="col-2 text-center">
+          <Link to="/dashboard/configuracion-usuarios">
+            <li
+              style={{ fontSize: "2em" }}
+              className="pi pi-arrow-left mt-2 mr-5"
+            ></li>
+          </Link>
+        </div>
+      </div>
       <div className="row">
         {contraseñaValida ? (
           <form onSubmit={actualizarUsuarioFuncion} className="col-9">
@@ -71,19 +92,7 @@ function Editar(props) {
                       [e.target.name]: e.target.value,
                     })
                   }
-                  defaultValue={nombre}
-                  className="mt-2 form-control"
-                />
-                <input
-                  type="text"
-                  name="usuario"
-                  onChange={(e) =>
-                    guardarNuevoUsuario({
-                      ...nuevoUsuario,
-                      [e.target.name]: e.target.value,
-                    })
-                  }
-                  defaultValue={usuario}
+                  value={nuevoUsuario.nombre}
                   className="mt-2 form-control"
                 />
                 <input
@@ -95,40 +104,49 @@ function Editar(props) {
                       [e.target.name]: e.target.value,
                     })
                   }
+                  value={nuevoUsuario.nuevoPassword}
                   placeholder="Nueva contraseña"
                   className="mt-2 form-control"
                 />
               </div>
             </div>
-            <div className="col-6 mt-3 input-group mb-3">
-              <input
-                type="text"
-                className="form-control"
-                name="correo"
-                onChange={(e) =>
-                  guardarNuevoUsuario({
-                    ...nuevoUsuario,
-                    [e.target.name]: e.target.value,
-                  })
-                }
-                defaultValue={
-                  correo ? correo.replace("@upec.edu.ec", "") : null
-                }
-                placeholder="Ingresa tu correo institucional"
-                aria-label="Recipient's username"
-                aria-describedby="basic-addon2"
-              />
-              <div className="input-group-append">
-                <span className="input-group-text" id="basic-addon2">
-                  @upec.edu.ec
-                </span>
+            {idAdmin && (
+              <>
+                <div className="col-6 mt-3 input-group mb-3">
+                  <input
+                    type="text"
+                    className="form-control"
+                    name="correo"
+                    onChange={(e) =>
+                      guardarNuevoUsuario({
+                        ...nuevoUsuario,
+                        [e.target.name]: e.target.value,
+                      })
+                    }
+                    defaultValue={
+                      correo ? correo.replace("@upec.edu.ec", "") : null
+                    }
+                    placeholder="Ingresa tu correo institucional"
+                    aria-label="Recipient's username"
+                    aria-describedby="basic-addon2"
+                  />
+                  <div className="input-group-append">
+                    <span className="input-group-text" id="basic-addon2">
+                      @upec.edu.ec
+                    </span>
+                  </div>
+                </div>
+              </>
+            )}
+            <div className="row">
+              <div className="col-6 text-center">
+                <button
+                  type="submit"
+                  className=" mt-4 btn btn-outline-success btn-block btn-lg-primary"
+                >
+                  Actualizar
+                </button>
               </div>
-              <button
-                type="submit"
-                className=" mt-4 btn btn-outline-success btn-block btn-large"
-              >
-                Actualizar
-              </button>
             </div>
           </form>
         ) : (

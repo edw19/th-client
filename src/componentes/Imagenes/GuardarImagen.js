@@ -68,7 +68,7 @@ export const GuardarImagen = ({ cedula, setNombreImagen }) => {
   if (loading) return < Spinner />
 
   const componente = cedula.length === 10 ?
-    <div {...getRootProps({ style })} className="mb-5" >
+    <div {...getRootProps({ style })} className="mb-3" >
       <input {...getInputProps()} />
       {isDragActive ? (
         <p className="texto-drop animated pulse infinite slow">Suelta La imagen aquí</p>

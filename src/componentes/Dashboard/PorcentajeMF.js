@@ -31,54 +31,64 @@ const renderCustomizedLabel = ({
 };
 
 function PorcentajeMF() {
-  const { loading, data } = useQuery(PORCENTAJE_MF);
+  const { loading, data, startPolling, stopPolling } = useQuery(PORCENTAJE_MF);
+
+  React.useEffect(() => {
+    startPolling(500);
+    return () => stopPolling();
+  }, [startPolling, stopPolling]);
 
   if (loading) return "Cargando...";
+
   return (
-<>
-{ data ?
-
-<PieChart width={400} height={348}>
-      <Pie
-        data={data ? data.porcentajeHombreMujeres : []}
-        cx={200}
-        cy={150}
-        labelLine={false}
-        label={renderCustomizedLabel}
-        fill="#8884d8"
-        dataKey="porcentaje"
-        >
-        {data.porcentajeHombreMujeres.map((entry, index) => (
-          <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
-          ))}
-      </Pie>
-      <Legend
-        content={() => (
-          <ul className="ml-2">
-            {" "}
-            {data.porcentajeHombreMujeres.map((entry, index) => (
-              <li
-              key={index}
-              type="square"
-              style={{
-                color: entry.genero === "Masculino" ? "#0088FE" : "#00C49F",
-              }}
-              >
-                <p style={{ color: "black" }}>
-                  {entry.genero} : {entry.value}
-                </p>
-              </li>
-            ))}{" "}
-          </ul>
-        )}
-        />
-      )
-    </PieChart>: null
-
-}
-
-</>
-);
+    <>
+      {data &&
+        (Object.keys(data.porcentajeHombreMujeres).length > 0 ? (
+          <PieChart width={400} height={348}>
+            <Pie
+              data={data ? data.porcentajeHombreMujeres : []}
+              cx={200}
+              cy={150}
+              labelLine={false}
+              label={renderCustomizedLabel}
+              fill="#8884d8"
+              dataKey="porcentaje"
+            >
+              {data.porcentajeHombreMujeres.map((entry, index) => (
+                <Cell
+                  key={`cell-${index}`}
+                  fill={COLORS[index % COLORS.length]}
+                />
+              ))}
+            </Pie>
+            <Legend
+              content={() => (
+                <ul className="ml-2">
+                  {" "}
+                  {data.porcentajeHombreMujeres.map((entry, index) => (
+                    <li
+                      key={index}
+                      type="square"
+                      style={{
+                        color:
+                          entry.genero === "Masculino" ? "#0088FE" : "#00C49F",
+                      }}
+                    >
+                      <p style={{ color: "black" }}>
+                        {entry.genero} : {entry.value}
+                      </p>
+                    </li>
+                  ))}{" "}
+                </ul>
+              )}
+            />
+            )
+          </PieChart>
+        ) : (
+          <h4>Sin Información</h4>
+        ))}
+    </>
+  );
 }
 
 export default PorcentajeMF;

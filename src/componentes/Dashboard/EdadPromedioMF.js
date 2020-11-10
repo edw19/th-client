@@ -30,32 +30,47 @@ const promedio = (edades) => {
 };
 
 function EdadPromedioMF() {
-  const { data, loading } = useQuery(EDAD_PROMEDIO_MF);
+  const { data, loading, startPolling, stopPolling } = useQuery(
+    EDAD_PROMEDIO_MF
+  );
+
+  React.useEffect(() => {
+    startPolling(500);
+    return () => stopPolling();
+  }, [startPolling, stopPolling]);
 
   if (loading) return "cargando ..";
-  const edadesM = edadPromedio(data.edadPromedioMF[0]);
-  const edadesF = edadPromedio(data.edadPromedioMF[1]);
+
+  const edadesM = edadPromedio(data?.edadPromedioMF[0]);
+  const edadesF = edadPromedio(data?.edadPromedioMF[1]);
   const promedioM = promedio(edadesM);
   const promedioF = promedio(edadesF);
-
   return (
     <div>
-      <BarChart
-        width={450}
-        height={300}
-        data={[
-          { genero: "Masculino", Promedio: promedioM },
-          { genero: "Femenino", Promedio: promedioF },
-        ]}
-      >
-        <CartesianGrid strokeDasharray="3 3" />
-        <XAxis dataKey="genero" />
-        <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
-        <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
-        <Tooltip />
-        <Legend />
-        <Bar yAxisId="left" dataKey="Promedio" fill="#1255d8" />
-      </BarChart>
+      {Object.keys(data.edadPromedioMF[0].fechas).length > 0 ||
+      Object.keys(data.edadPromedioMF[0].fechas).length > 0 ? (
+        <BarChart
+          width={450}
+          height={300}
+          data={[
+            { genero: "Masculino", Promedio: Math.ceil(promedioM) },
+            {
+              genero: "Femenino",
+              Promedio: isNaN(Math.ceil(promedioF)) ? 0 : Math.ceil(promedioF),
+            },
+          ]}
+        >
+          <CartesianGrid strokeDasharray="3 3" />
+          <XAxis dataKey="genero" />
+          <YAxis yAxisId="left" orientation="left" stroke="#8884d8" />
+          <YAxis yAxisId="right" orientation="right" stroke="#82ca9d" />
+          <Tooltip />
+          <Legend />
+          <Bar yAxisId="left" dataKey="Promedio" fill="#1255d8" />
+        </BarChart>
+      ) : (
+        <h4>Sin Información</h4>
+      )}
     </div>
   );
 }
