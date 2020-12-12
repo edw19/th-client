@@ -46,7 +46,7 @@ function Dashboard() {
             alignItems: "center",
           }}
         >
-          <p>Edad promerdio de hombre y promedio de mujeres</p>
+          <p>Edad promerdio de hombres y mujeres</p>
           <EdadPromedioMF />
         </div>
       </div>

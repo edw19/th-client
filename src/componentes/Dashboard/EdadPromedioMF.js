@@ -53,9 +53,9 @@ function EdadPromedioMF() {
           width={450}
           height={300}
           data={[
-            { genero: "Masculino", Promedio: Math.ceil(promedioM) },
+            { genero: "Hombres", Promedio: Math.ceil(promedioM) },
             {
-              genero: "Femenino",
+              genero: "Mujeres",
               Promedio: isNaN(Math.ceil(promedioF)) ? 0 : Math.ceil(promedioF),
             },
           ]}

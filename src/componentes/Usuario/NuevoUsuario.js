@@ -145,9 +145,11 @@ function NuevoUsuario(props) {
             />
           </div>
           <div className="row mt-3">
+            <div className="col"></div>
             <button type="submit" className="col btn btn-outline-primary">
               {loading ? "Creando usuario..." : "Crear Usuario"}
             </button>
+            <div className="col"></div>
           </div>
         </div>
         <div className="col-4">

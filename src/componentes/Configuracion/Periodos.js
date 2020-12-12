@@ -22,7 +22,7 @@ function Periodos({ periodos, mostrarInfo, messageClear }) {
       let noti = new Noty({
         type: "warning",
         layout: "center",
-        text: `<h6> ¿Estás seguro de eliminar este Período?</h6> <br /> <p>También se eliminarán registros de permisos, vaciones y contratos registrados en el período <br/> ${nombre}</p>`,
+        text: `<h6> ¿Estás seguro de eliminar este Período?</h6> <br /> <p>También se eliminarán registros de permisos, vaciones y documentos registrados en el período <br/> ${nombre}</p>`,
         theme: "mint",
         modal: true,
         closeWith: ["button"],

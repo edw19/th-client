@@ -24,7 +24,7 @@ function DescontarMasivo({
               type: "info",
               layout: "center",
               text:
-                "<div><h6> Descontar Permisos de Funcionarios ¿Deseas continuar ?</h6> <br/><p>Esta función descuenta todos los permisos registrados de todos los funcionarios</p></div>",
+                "<div><h6> Descontar Permisos de Funcionarios ¿Deseas continuar ?</h6> <br/><p>Esta función descuenta todos los permisos registrados de todos los funcionarios en este período</p></div>",
               theme: "mint",
               timeout: false,
               modal: true,

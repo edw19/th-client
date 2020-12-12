@@ -139,7 +139,7 @@ function Editar(props) {
               </>
             )}
             <div className="row">
-              <div className="col-6 text-center">
+              <div className="col-2 text-center">
                 <button
                   type="submit"
                   className=" mt-4 btn btn-outline-success btn-block btn-lg-primary"

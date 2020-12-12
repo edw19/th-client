@@ -39,7 +39,7 @@ function PorcentajeMF() {
   }, [startPolling, stopPolling]);
 
   if (loading) return "Cargando...";
-
+  if (typeof data === "undefined") return <h4>Sin Información</h4>;
   return (
     <>
       {data &&

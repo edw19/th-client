@@ -282,8 +282,8 @@ export default withRouter(function EditarFuncionario(props) {
       <h2>Editar Funcionario</h2>
       <div className="row">
         <div className="col-6">
-          <ScrollPanel style={{ width: "100%", height: "650px" }}>
-            <form onSubmit={enviarFormulario}>
+          <form onSubmit={enviarFormulario}>
+            <ScrollPanel style={{ width: "100%", height: "650px" }}>
               <div className="row mb-4 mt-4">
                 <div className="col mr-5">
                   <span className="p-float-label">
@@ -552,20 +552,20 @@ export default withRouter(function EditarFuncionario(props) {
                   <p className="text-center mt-4 font-weight-bold">{calculo}</p>
                 </div>
               </div>
-              <div className="row">
-                <div className="col"></div>
-                <div className="col mr-5">
-                  <button
-                    type="submit"
-                    className="btn btn-outline-success btn-lg btn-block"
-                  >
-                    <i className="pi pi-save" />
-                    Guardar Cambios
-                  </button>
-                </div>
+            </ScrollPanel>
+            <div className="row">
+              <div className="col"></div>
+              <div className="col mr-5">
+                <button
+                  type="submit"
+                  className="btn btn-outline-success btn-lg btn-block"
+                >
+                  <i className="pi pi-save" />
+                  Guardar Cambios
+                </button>
               </div>
-            </form>
-          </ScrollPanel>
+            </div>
+          </form>
         </div>
         <div className="col-2 text-center">
           <GuardarImagen

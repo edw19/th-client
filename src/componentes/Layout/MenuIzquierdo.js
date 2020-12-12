@@ -106,7 +106,7 @@ function MenuIzquierdo() {
               className="list-group-item list-group-item-action bg-dark text-white "
             >
               <i className="pi pi-file-pdf" style={{ fontSize: "2em" }}></i>
-              Reportes PDF
+              Reportes
             </Link>
           )}
           {rol === "ADMINISTRADOR" && (
@@ -115,7 +115,7 @@ function MenuIzquierdo() {
               className="list-group-item list-group-item-action bg-dark text-white "
             >
               <i className="pi pi-file-pdf" style={{ fontSize: "2em" }}></i>
-              Reportes PDF
+              Reportes
             </Link>
           )}
           <Link

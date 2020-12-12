@@ -142,6 +142,7 @@ function Usuarios({ id }) {
                   </Link>
                   <button
                     className="btn btn-outline-danger"
+                    disabled={usuario.rol === "ADMINISTRADOR" ? true : false}
                     onClick={async () => {
                       try {
                         await new Promise((resolve, reject) => {
