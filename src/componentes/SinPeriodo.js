@@ -9,7 +9,7 @@ function SinPeriodo() {
             <div className="card-body">
                 <h5 className="card-title">Configuración Inicial</h5>
                 <p className="card-text">Crea un período y seleccionalo como período vigente</p>
-                <Link to="/dashboard/configuracion-periodo" className="btn btn-primary">Crear Período</Link>
+                <Link to="/dashboard/crear-periodo" className="btn btn-primary">Crear Período</Link>
             </div>
         </div>
     )
