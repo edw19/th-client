@@ -9,7 +9,7 @@ import Error, { mostrarError } from "../Alertas/Error";
 import Autenticado from "./Autenticado";
 import LoginImagen from "../materiales/loginImagen.svg";
 
-const URL = "http://localhost:5000/login";
+const URL = "http://190.15.129.83:5000/login";
 
 function Login(props) {
   const headers = (token) => {

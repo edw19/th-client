@@ -279,7 +279,7 @@ function AdministrarPermisos() {
                       width="250px"
                       height="250px"
                       className="img-fluid rounded rounded-circle"
-                      src={`http://localhost:5000/imagenes/${funcionario.nombreImagen}`}
+                      src={`http://190.15.129.83:5000/imagenes/${funcionario.nombreImagen}`}
                       alt={`${funcionario.nombre} ${funcionario.apellido}`}
                     />
                   )}

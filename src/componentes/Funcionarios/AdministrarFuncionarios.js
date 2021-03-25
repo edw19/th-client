@@ -150,7 +150,7 @@ export default function AdministrarFuncionarios({ rol }) {
                     />
                   </div>
                   <a
-                    href="http://localhost:5000/formato"
+                    href="http://190.15.129.83:5000/formato"
                     onMouseEnter={() => {
                       mostrarInfo(
                         "Esta función le permite descargar el formato necesario para registrar funcionarios desde un archivo de excel"
