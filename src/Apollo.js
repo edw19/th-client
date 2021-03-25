@@ -31,7 +31,7 @@ const link = createUploadLink({
 
 export const cliente = new ApolloClient({
   link: ApolloLink.from([linkAuth, link]),
-  credentials: "same-origin",
+  //   credentials: "same-origin",
   //   fetchOptions: {
   //     credentials: "same-origin",
   //   },
