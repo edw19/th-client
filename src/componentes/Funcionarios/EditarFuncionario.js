@@ -576,7 +576,7 @@ export default withRouter(function EditarFuncionario(props) {
             <>
               <h6 className="text-center">Imagen Actual del Funcionario</h6>
               <img
-                src={`http://localhost:5000/imagenes/${
+                src={`http://190.15.129.83:5000/imagenes/${
                   nombreImagenActualizada
                     ? nombreImagenActualizada
                     : funcionario.nombreImagen

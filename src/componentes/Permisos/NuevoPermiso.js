@@ -389,7 +389,7 @@ export default withRouter(function NuevoPermiso(props) {
                 <div className="col-4 text-left">
                   {funcionario.obtenerFuncionario.nombreImagen && (
                     <img
-                      src={`http://localhost:5000/imagenes/${funcionario.obtenerFuncionario.nombreImagen}`}
+                      src={`http://190.15.129.83:5000/imagenes/${funcionario.obtenerFuncionario.nombreImagen}`}
                       width="200px"
                       height="200px"
                       className="img-fluid rounded rounded-circle"

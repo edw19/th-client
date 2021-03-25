@@ -75,7 +75,7 @@ function AdministrarContratos() {
   const handleDocs = async (e) => {
     setCargandoDocs(true);
     e.preventDefault();
-    const url = `http://localhost:5000/contratos-funcionario/?funcionario=${funcionario.id}&periodo=${periodoSeleccionado.id}`;
+    const url = `http://190.15.129.83:5000/contratos-funcionario/?funcionario=${funcionario.id}&periodo=${periodoSeleccionado.id}`;
     const doc = await fetch(url, {
       method: "GET",
       headers: {
@@ -91,7 +91,7 @@ function AdministrarContratos() {
   const handleDocsAll = async (e) => {
     setCargandoDocsAll(true);
     e.preventDefault();
-    const url = `http://localhost:5000/todos-contratos/?funcionario=${funcionario.id}`;
+    const url = `http://190.15.129.83:5000/todos-contratos/?funcionario=${funcionario.id}`;
     const doc = await fetch(url, {
       method: "GET",
       headers: {
@@ -108,7 +108,7 @@ function AdministrarContratos() {
   const handleAllContratosPeriodo = async (e) => {
     setCargandoDocsAll(true);
     e.preventDefault();
-    const url = `http://localhost:5000/todos-contratos-periodo/?periodo=${periodoSeleccionado.id}`;
+    const url = `http://190.15.129.83:5000/todos-contratos-periodo/?periodo=${periodoSeleccionado.id}`;
     const doc = await fetch(url, {
       method: "GET",
       headers: {
@@ -308,7 +308,7 @@ function AdministrarContratos() {
                               </td>
                               <td className="d-flex justify-content-beetween">
                                 <a
-                                  href={`http://localhost:5000/contratos/${doc.nombreArchivo}`}
+                                  href={`http://190.15.129.83:5000/contratos/${doc.nombreArchivo}`}
                                   className="text-decoration-none"
                                   target="_blank"
                                   rel="noopener noreferrer"
@@ -368,7 +368,7 @@ function AdministrarContratos() {
                     width="250px"
                     height="250px"
                     className="img-fluid rounded rounded-circle"
-                    src={`http://localhost:5000/imagenes/${funcionario.nombreImagen}`}
+                    src={`http://190.15.129.83:5000/imagenes/${funcionario.nombreImagen}`}
                     alt={`${funcionario.nombre} ${funcionario.apellido}`}
                   />
                 </>

@@ -188,7 +188,7 @@ export default withRouter(function MostrarFuncionario({
                     <div className="d-flex justify-content-center">
                       <img
                         className="img-fluid rounded rounded-circle float-right mt-3"
-                        src={`http://localhost:5000/imagenes/${data.nombreImagen}`}
+                        src={`http://190.15.129.83:5000/imagenes/${data.nombreImagen}`}
                         width="250px"
                         height="800px"
                         alt="Imagen del funcionario"

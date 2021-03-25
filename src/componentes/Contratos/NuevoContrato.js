@@ -274,7 +274,7 @@ function NuevoContrato(props) {
                   width="250px"
                   height="250px"
                   className="mt-5 img-fluid rounded rounded-circle "
-                  src={`http://localhost:5000/imagenes/${funcionario.nombreImagen}`}
+                  src={`http://190.15.129.83:5000/imagenes/${funcionario.nombreImagen}`}
                   alt={`${funcionario.nombreImagen}`}
                 />
               )}

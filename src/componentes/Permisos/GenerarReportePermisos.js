@@ -1,6 +1,6 @@
-import React, { useContext } from "react"
-import { REPORTE_PERMISOS } from "../../queries"
-import { useQuery } from "@apollo/react-hooks"
+import React, { useContext } from "react";
+import { REPORTE_PERMISOS } from "../../queries";
+import { useQuery } from "@apollo/react-hooks";
 import {
   Page,
   Text,
@@ -8,15 +8,15 @@ import {
   Document,
   StyleSheet,
   Image,
-} from "@react-pdf/renderer"
-import upec from "../materiales/upec.png"
-import educamos from "../materiales/educamos.png"
-import { PDFDownloadLink } from "@react-pdf/renderer"
-import { permisosContext } from "../Context/PermisosContext"
-import { periodoContext } from "../Context/PeriodoContext"
-import "moment/locale/es"
-import moment from "moment"
-moment.locale("es")
+} from "@react-pdf/renderer";
+import upec from "../materiales/upec.png";
+import educamos from "../materiales/educamos.png";
+import { PDFDownloadLink } from "@react-pdf/renderer";
+import { permisosContext } from "../Context/PermisosContext";
+import { periodoContext } from "../Context/PeriodoContext";
+import "moment/locale/es";
+import moment from "moment";
+moment.locale("es");
 
 const styles = StyleSheet.create({
   body: {
@@ -77,7 +77,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     marginRight: 80,
   },
-})
+});
 
 function DocumentoPermisos({ permisos, resultado, periodo, funcionario }) {
   return (
@@ -123,7 +123,7 @@ function DocumentoPermisos({ permisos, resultado, periodo, funcionario }) {
         <View style={styles.funcionario}>
           <View>
             <Image
-              src={`http://localhost:5000/imagenes/${funcionario.nombreImagen}`}
+              src={`http://190.15.129.83:5000/imagenes/${funcionario.nombreImagen}`}
               style={styles.image}
             />
           </View>
@@ -377,21 +377,21 @@ function DocumentoPermisos({ permisos, resultado, periodo, funcionario }) {
         />
       </Page>
     </Document>
-  )
+  );
 }
 
 function GenerarReportePermisos() {
-  const { funcionario } = useContext(permisosContext)
-  const { periodoSeleccionado } = useContext(periodoContext)
+  const { funcionario } = useContext(permisosContext);
+  const { periodoSeleccionado } = useContext(periodoContext);
   const { data, loading } = useQuery(REPORTE_PERMISOS, {
     fetchPolicy: "network-only",
     variables: {
       id: funcionario.id,
       periodo: periodoSeleccionado.id,
     },
-  })
+  });
 
-  if (!data) return "No hay permisos"
+  if (!data) return "No hay permisos";
 
   const documento = !loading ? (
     <DocumentoPermisos
@@ -400,7 +400,7 @@ function GenerarReportePermisos() {
       funcionario={funcionario}
       periodo={periodoSeleccionado}
     />
-  ) : undefined
+  ) : undefined;
   return (
     <>
       <PDFDownloadLink
@@ -426,7 +426,7 @@ function GenerarReportePermisos() {
         }
       </PDFDownloadLink>
     </>
-  )
+  );
 }
 
-export default GenerarReportePermisos
+export default GenerarReportePermisos;

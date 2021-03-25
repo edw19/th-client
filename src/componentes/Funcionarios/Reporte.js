@@ -280,7 +280,7 @@ function Reporte({ funcionario }) {
               }}
             >
               <Image
-                src={`http://localhost:5000/imagenes/${funcionario.nombreImagen}`}
+                src={`http://190.15.129.83:5000/imagenes/${funcionario.nombreImagen}`}
                 style={styles.image}
               />
             </View>

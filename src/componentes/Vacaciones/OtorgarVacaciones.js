@@ -197,7 +197,7 @@ export default withRouter(function OtorgarVacaciones(props) {
                 <div className="col-4 text-center">
                   {funcionario.nombreImagen && (
                     <img
-                      src={`http://localhost:5000/imagenes/${funcionario.nombreImagen}`}
+                      src={`http://190.15.129.83:5000/imagenes/${funcionario.nombreImagen}`}
                       width="200px"
                       height="200px"
                       className="img-fluid rounded rounded-circle"
