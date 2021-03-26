@@ -16,6 +16,9 @@ import "./index.css";
 import { ApolloProvider } from "@apollo/react-hooks";
 import { cliente } from "./Apollo";
 
+console.log("variable NODE_ENV", process.env.NODE_ENV);
+console.log("variable URI_DEPLOY", process.env.URI_DEPLOY);
+
 ReactDOM.render(
   <ApolloProvider client={cliente}>
     <App />

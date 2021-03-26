@@ -21,6 +21,8 @@ import GenerarReportePermisos from "./GenerarReportePermisos";
 import { useState } from "react";
 moment.locale("es");
 
+console.log("variable URI_DEPLOY en permisos", process.env.URI_DEPLOY);
+
 function AdministrarPermisos() {
   const {
     permisos,
